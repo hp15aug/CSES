@@ -1,9 +1,9 @@
-package com.cses.introductory;
+package Introductory;
 
 import java.util.*;
 import java.io.*;
 
-public class MissingNumber {
+public class WeirdAlgorithm {
 static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 static StringTokenizer st;
 static PrintWriter out = new PrintWriter(System.out);
@@ -21,18 +21,18 @@ public static void main(String[] args) throws Exception {
 
 static void solve() throws Exception {
     // Your solution here
-    int n=nextInt();
-    int xorSum=0;
+    long n = nextLong();
+    out.print(n+ " ");
 
-    for (int i = 1; i <= n; i++) {
-        xorSum^=i;
+    while ( n!= 1){
+        if(n%2 == 0){
+            n/=2;
+            out.print(n+" ");
+        }else{
+            n=(n*3)+1;
+            out.print(n+ " ");
+        }
     }
-
-    for (int i = 0; i < n - 1; i++) {
-        xorSum^=nextInt();
-    }
-
-    out.print(xorSum);
 }
 
 // Fast I/O methods

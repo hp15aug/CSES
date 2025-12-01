@@ -1,9 +1,9 @@
-package com.cses.introductory;
+package Introductory;
 
 import java.util.*;
 import java.io.*;
 
-public class WeirdAlgorithm {
+public class Repetitions {
 static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 static StringTokenizer st;
 static PrintWriter out = new PrintWriter(System.out);
@@ -21,18 +21,26 @@ public static void main(String[] args) throws Exception {
 
 static void solve() throws Exception {
     // Your solution here
-    long n = nextLong();
-    out.print(n+ " ");
+    String str=next();
 
-    while ( n!= 1){
-        if(n%2 == 0){
-            n/=2;
-            out.print(n+" ");
-        }else{
-            n=(n*3)+1;
-            out.print(n+ " ");
-        }
+    int c=1;
+    int max=1;
+
+    if(str.isEmpty()){
+        out.print(0);
+        return;
     }
+
+    for (int i = 1; i < str.length(); i++) {
+        if(str.charAt(i) == str.charAt(i-1)) {
+            c++;
+        }
+        else{
+            c=1;
+        }
+        max=Math.max(max, c);
+    }
+    System.out.println(max);
 }
 
 // Fast I/O methods
