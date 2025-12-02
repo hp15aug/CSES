@@ -3,14 +3,14 @@ package Introductory;
 import java.util.*;
 import java.io.*;
 
-public class NumberSpiral {
+public class BitStrings  {
 static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 static StringTokenizer st;
 static PrintWriter out = new PrintWriter(System.out);
 
 public static void main(String[] args) throws Exception {
     int t = 1;
-     t = nextInt(); // Uncomment for multiple test cases
+    // t = nextInt(); // Uncomment for multiple test cases
 
     while(t-- > 0) {
         solve();
@@ -20,29 +20,20 @@ public static void main(String[] args) throws Exception {
 }
 
 static void solve() throws Exception {
+    // Your solution here
+    int n = nextInt();
 
-    long y = nextLong();
-    long x=nextLong();
-
-    long z=Math.max(x, y);
-
-    if(z%2 == 0){
-        long res;
-        if(y == z){
-            res = ( z * z) - x + 1;
-        }else{
-            res = (z - 1) * (z - 1) + y;
+    long mod=1000000007;
+    long ans=1;
+    long base=2;
+    while(n > 0){
+        if(n%2 == 1){
+            ans=(ans*base)%mod;
         }
-        out.println(res);
-    }else{
-        long res;
-        if(y == z){
-            res = (long) (z - 1) * (z - 1) + x;
-        }else{
-            res = ((long) z * z) - y + 1;
-        }
-        out.println(res);
+        base=(base*base)%mod;
+        n/=2;
     }
+    out.println(ans);
 }
 
 // Fast I/O methods
