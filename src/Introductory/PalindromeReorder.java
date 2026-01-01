@@ -3,7 +3,7 @@ package Introductory;
 import java.util.*;
 import java.io.*;
 
-public class TrailingZeros {
+public class PalindromeReorder {
 static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 static StringTokenizer st;
 static PrintWriter out = new PrintWriter(System.out);
@@ -21,14 +21,46 @@ public static void main(String[] args) throws Exception {
 
 static void solve() throws Exception {
     // Your solution here
-    int n = nextInt();
-    int c=0;
+    String s=next();
 
-    while(n>0){
-        n/=5;
-        c+=n;
+    int[] freq=new int[26];
+
+    for (int i = 0; i < s.length(); i++) {
+        freq[s.charAt(i) - 'A']++;
     }
-    out.println(c);
+
+    int countOdd=0; char odd='a';
+    for (int i = 0; i < 26; i++) {
+        if(freq[i]%2 == 1){
+            countOdd++;
+            odd= (char) (i+65);
+//            System.out.println(odd);
+        }
+    }
+
+    if(countOdd > 1){
+        System.out.println("NO SOLUTION");
+        return;
+    }
+
+    StringBuilder sb=new StringBuilder();
+    for (int i = 0; i < 26; i++) {
+        char ch=(char)(i+'A');
+        if(freq[i]>0){
+            sb.append(String.valueOf(ch).repeat(freq[i] / 2));
+        }
+    }
+//    sb.append(odd);
+    StringBuilder ans=new StringBuilder(sb);
+    if(countOdd == 1){
+        ans.append(odd);
+    }
+
+    for(int i=sb.length()-1; i>= 0; i--){
+        ans.append(sb.charAt(i));
+    }
+
+    System.out.println(ans.toString());
 }
 
 // Fast I/O methods
