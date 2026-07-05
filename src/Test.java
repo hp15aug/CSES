@@ -1,22 +1,14 @@
-//package Introductory;
-
 import java.util.*;
 import java.io.*;
 
-public class ChessboardsAndQueens {
+public class Test {
 static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 static StringTokenizer st;
 static PrintWriter out = new PrintWriter(System.out);
 
-    static char[][] board = new char[8][8];
-    static boolean[] cols = new boolean[8];
-    static boolean[] diag1 = new boolean[15];
-    static boolean[] diag2 = new boolean[15];
-    static int ans = 0;
-
 public static void main(String[] args) throws Exception {
     int t = 1;
-    // t = nextInt(); // Uncomment for multiple test cases
+     t = nextInt(); // Uncomment for multiple test cases
 
     while(t-- > 0) {
         solve();
@@ -27,37 +19,30 @@ public static void main(String[] args) throws Exception {
 
 static void solve() throws Exception {
     // Your solution here
-    for (int i = 0; i < 8; i++) {
-        String line = next();
-        board[i] = line.toCharArray();
+    int n = nextInt();
+    int[] arr=new int[n];
+
+    for (int i = 0; i < n; i++) {
+        arr[i]=nextInt();
     }
 
-    f(0);
-    out.println(ans);
+    int fINd=high(arr);
+    int highElement=arr[fINd]; //8
+//    System.out.println(highElement);
+
+
+
 }
 
-static void f(int y){
-    if (y == 8) {
-        ans++;
-        return;
+static int high(int[] arr){
+    int idx=0;
+
+    for (int i = 1; i < arr.length; i++) {
+        if(arr[i-1] > arr[i]){
+            idx=i-1;
+        }
     }
-
-    for (int x = 0; x < 8; x++) {
-        if (board[y][x] == '*') continue;
-
-        if (cols[x] || diag1[x + y] || diag2[x - y + 7]) continue;
-
-        cols[x] = true;
-        diag1[x + y] = true;
-        diag2[x - y + 7] = true;
-
-        f(y + 1);
-
-        cols[x] = false;
-        diag1[x + y] = false;
-        diag2[x - y + 7] = false;
-
-    }
+    return idx;
 }
 
 // Fast I/O methods

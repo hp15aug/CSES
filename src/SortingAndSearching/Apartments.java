@@ -1,18 +1,12 @@
-//package Introductory;
+//package SortingAndSearching;
 
 import java.util.*;
 import java.io.*;
 
-public class ChessboardsAndQueens {
+public class Apartments {
 static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 static StringTokenizer st;
 static PrintWriter out = new PrintWriter(System.out);
-
-    static char[][] board = new char[8][8];
-    static boolean[] cols = new boolean[8];
-    static boolean[] diag1 = new boolean[15];
-    static boolean[] diag2 = new boolean[15];
-    static int ans = 0;
 
 public static void main(String[] args) throws Exception {
     int t = 1;
@@ -27,37 +21,46 @@ public static void main(String[] args) throws Exception {
 
 static void solve() throws Exception {
     // Your solution here
-    for (int i = 0; i < 8; i++) {
-        String line = next();
-        board[i] = line.toCharArray();
+    int n = nextInt();
+    int m= nextInt();
+    int k= nextInt();
+
+    int[] applicants =new int[n];
+    for (int i = 0; i < n; i++) {
+        applicants[i]=nextInt();
     }
+    Arrays.sort(applicants);
+    // 45 60 60 80
 
-    f(0);
-    out.println(ans);
-}
-
-static void f(int y){
-    if (y == 8) {
-        ans++;
-        return;
+    int[] apartment =new int[m];
+    for (int i = 0; i < m; i++) {
+        apartment[i]=nextInt();
     }
+    Arrays.sort(apartment);
+    // 30 60 75
 
-    for (int x = 0; x < 8; x++) {
-        if (board[y][x] == '*') continue;
+    int i,j;
+    i=j=0;
 
-        if (cols[x] || diag1[x + y] || diag2[x - y + 7]) continue;
+    int count=0;
 
-        cols[x] = true;
-        diag1[x + y] = true;
-        diag2[x - y + 7] = true;
+    while(i<n && j<m){
+        int max=applicants[i]+k;
+        int min=applicants[i]-k;
 
-        f(y + 1);
-
-        cols[x] = false;
-        diag1[x + y] = false;
-        diag2[x - y + 7] = false;
-
+        if (Math.abs(applicants[i] - apartment[j]) <= k){
+            count++;
+            i++;
+            j++;
+        }
+        else if(min > apartment[j]){
+            j++;
+        }
+        else{
+            i++;
+        }
     }
+        out.println(count);
 }
 
 // Fast I/O methods
